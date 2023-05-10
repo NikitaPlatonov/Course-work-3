@@ -8,8 +8,9 @@ public class Todos {
     private static String[] tasks = new String[SIZE_TODOLIST_ARRAY];
     public void addTask(String task) {
         for(int i = 0; i < tasks.length;i++){
-            if (tasks[i] != null) {
+            if (tasks[i] == null) {
                 tasks[i] = task;
+                break;
             }
         }
     }
@@ -18,12 +19,18 @@ public class Todos {
         for(int i = 0; i < tasks.length;i++){
             if (tasks[i].equals(task)) {
                 tasks[i] = null;
+                break;
             }
         }
     }
 
     public String getAllTasks() {
-        List<String> sortedListTasks = Arrays.asList(tasks);
+        List<String> sortedListTasks = new ArrayList<>();
+        for(int i = 0; i < tasks.length;i++){
+            if(tasks[i] != null){
+                sortedListTasks.add(tasks[i]);
+            }
+        }
         Collections.sort(sortedListTasks);
         StringBuilder allTasks = new StringBuilder();
         for(String task : sortedListTasks){
