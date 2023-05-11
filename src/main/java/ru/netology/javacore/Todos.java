@@ -5,32 +5,21 @@ import java.util.stream.Collectors;
 
 public class Todos {
     private static final int SIZE_TODOLIST_ARRAY = 7;
-    private static String[] tasks = new String[SIZE_TODOLIST_ARRAY];
+    private static Set<String> tasks = new HashSet<>();
     public void addTask(String task) {
-        for(int i = 0; i < tasks.length;i++){
-            if (tasks[i] == null) {
-                tasks[i] = task;
-                break;
-            }
+        if(tasks.size() < 8 && task != null){
+            tasks.add(task);
         }
+        getAllTasks();
     }
 
     public void removeTask(String task) {
-        for(int i = 0; i < tasks.length;i++){
-            if (tasks[i].equals(task)) {
-                tasks[i] = null;
-                break;
-            }
-        }
+        tasks.remove(task);
+        getAllTasks();
     }
 
     public String getAllTasks() {
-        List<String> sortedListTasks = new ArrayList<>();
-        for(int i = 0; i < tasks.length;i++){
-            if(tasks[i] != null){
-                sortedListTasks.add(tasks[i]);
-            }
-        }
+        List<String> sortedListTasks = new ArrayList<>(tasks);
         Collections.sort(sortedListTasks);
         StringBuilder allTasks = new StringBuilder();
         for(String task : sortedListTasks){
