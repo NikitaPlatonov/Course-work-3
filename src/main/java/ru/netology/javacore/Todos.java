@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Todos {
-    private static Set<String> tasks = new HashSet<>();
+    private Set<String> tasks = new HashSet<>();
     public void addTask(String task) {
         if(tasks.size() < 7){
             tasks.add(task);
