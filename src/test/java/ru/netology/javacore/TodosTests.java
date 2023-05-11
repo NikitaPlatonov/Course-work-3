@@ -7,12 +7,10 @@ public class TodosTests {
     @BeforeEach
     void init(){
         todos = new Todos();
-        System.out.println("Выполняется перед каждым тестом");
     }
     @Test
     //Этот тестирует то, что метод addTask в классе Todos не будет добавлять никакие задачи после 7-й
     void addTaskMoreSeven(){
-        System.out.println("ТЕСТ 1");
         todos.addTask("Первая задача");
         todos.addTask("Вторая задача");
         todos.addTask("Третья задача");
@@ -23,15 +21,21 @@ public class TodosTests {
         todos.addTask("Восьмая задача");
         todos.addTask("Девятая задача");
         todos.addTask("Десятая задача");
-        String expected = "Вторая задача Первая задача Пятая задача Седьмая задача Третья задача Четвертая задача Шестая задача ";
+        String expected = "Вторая задача Первая задача Пятая задача Седьмая задача Третья задача Четвертая задача Шестая задача";
         Assertions.assertEquals(expected, todos.getAllTasks());
     }
     @Test
     void removeTask(){
-        System.out.println("ТЕСТ 2");
         todos.addTask("Акробатика");
         todos.removeTask("Акробатика");
         String expectedTasks = "";
         Assertions.assertEquals(expectedTasks, todos.getAllTasks());
+    }
+    @Test
+    void getAllTasks(){
+        todos.addTask("Бег");
+        todos.addTask("Забрать посылку");
+        String expected = "Бег Забрать посылку";
+        Assertions.assertEquals(expected,todos.getAllTasks());
     }
 }

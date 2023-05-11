@@ -22,7 +22,11 @@ public class Todos {
         sortedListTasks.sort(String::compareToIgnoreCase);
         StringBuilder allTasks = new StringBuilder();
         for(String task : sortedListTasks){
-            allTasks.append(task).append(" ");
+            if(allTasks.length() == 0){
+                allTasks.append(task);
+            } else {
+                allTasks.append(" ").append(task);
+            }
         }
         return allTasks.toString();
     }
