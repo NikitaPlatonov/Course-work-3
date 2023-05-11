@@ -9,7 +9,7 @@ public class TodosTests {
         todos = new Todos();
     }
     @Test
-    //Этот тестирует то, что метод addTask в классе Todos не будет добавлять никакие задачи после 7-й
+    //Этот тест тестирует то, что метод addTask в классе Todos не будет добавлять никакие задачи после 7-й
     void addTaskMoreSeven(){
         todos.addTask("Первая задача");
         todos.addTask("Вторая задача");
@@ -25,6 +25,7 @@ public class TodosTests {
         Assertions.assertEquals(expected, todos.getAllTasks());
     }
     @Test
+    //Этот тест тестирует работоспособность метода removeTask в -> Todos
     void removeTask(){
         todos.addTask("Акробатика");
         todos.removeTask("Акробатика");
@@ -32,6 +33,7 @@ public class TodosTests {
         Assertions.assertEquals(expectedTasks, todos.getAllTasks());
     }
     @Test
+        //Этот тест тестирует работоспособность метода getAllTasks в -> Todos
     void getAllTasks(){
         todos.addTask("Бег");
         todos.addTask("Забрать посылку");
