@@ -31,17 +31,24 @@ public class TodoServer {
                     JsonParser parser = new JsonParser();
                     JsonObject jsonObject = parser.parse(strJson).getAsJsonObject();
                     String methodFromRequest = jsonObject.get("type").getAsString();
-                    String taskFromRequest = jsonObject.get("task").getAsString();
-                    if (methodFromRequest.equals("ADD")) {
-                        todos.addTask(taskFromRequest);
-                        out.println("Измененный список: ");
-                        out.println(todos.getAllTasks());
-                    } else if (methodFromRequest.equals("REMOVE")) {
-                        todos.removeTask(taskFromRequest);
+                    String taskFromRequest;
+                    if (methodFromRequest.equals("RESTORE")) {
+                        todos.restoreOperation();
                         out.println("Измененный список: ");
                         out.println(todos.getAllTasks());
                     } else {
-                        out.println("Такой функции нет");
+                        taskFromRequest = jsonObject.get("task").getAsString();
+                        if (methodFromRequest.equals("ADD")) {
+                            todos.addTask(taskFromRequest);
+                            out.println("Измененный список: ");
+                            out.println(todos.getAllTasks());
+                        } else if (methodFromRequest.equals("REMOVE")) {
+                            todos.removeTask(taskFromRequest);
+                            out.println("Измененный список: ");
+                            out.println(todos.getAllTasks());
+                        } else {
+                            out.println("Такой функции нет");
+                        }
                     }
                 }
             }
