@@ -12,9 +12,15 @@ import java.net.Socket;
 
 public class TodoServer {
     private final int port;
+    private final Todos todos;
 
     public TodoServer(int port, Todos todos) {
         this.port = port;
+        this.todos = todos;
+    }
+
+    public void start() throws IOException {
+        System.out.println("Starting server at " + port + "...");
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             System.out.println("Сервер запущен");
             while (true) {
@@ -43,9 +49,5 @@ public class TodoServer {
             System.out.println("Не могу стартовать сервер");
             e.printStackTrace();
         }
-    }
-
-    public void start() throws IOException {
-        System.out.println("Starting server at " + port + "...");
     }
 }
