@@ -34,16 +34,16 @@ public class Todos {
 
     public void restoreOperation() {
         List<String> operationList = new ArrayList<>(historyOperation);
-        for(int i = 0;i<operationList.size();i++){
+        for(int i = operationList.size() - 1; i>=0; i--) {
             String[] operation = operationList.get(i).split(" ");
             if(operation[0].equals("ADD")){
-                removeTask(operation[1]);
+                tasks.remove(operation[1]);
                 historyOperation.remove(i);
                 historyOperation.add("RESTORE ADD");
                 break;
             }
             if(operation[0].equals("REMOVE")){
-                addTask(operation[1]);
+                tasks.add(operation[1]);
                 historyOperation.remove(i);
                 historyOperation.add("RESTORE REMOVE");
                 break;
