@@ -28,3 +28,7 @@
 ```
 
 ## Установка
+1. Склонируйте репозиторий к себе на компьютер с помощью git clone:
+```git
+git clone https://github.com/NikitaPlatonov/Course-work-3.git
+```
