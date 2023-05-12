@@ -32,3 +32,4 @@
 ```git
 git clone https://github.com/NikitaPlatonov/Course-work-3.git
 ```
+2. Откройте установленный репозиторий через свой текстовый редактор.
