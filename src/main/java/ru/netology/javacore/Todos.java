@@ -1,16 +1,14 @@
 package ru.netology.javacore;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Todos {
-    private final Set<String> tasks = new HashSet<>();
+    private final TreeSet<String> tasks = new TreeSet<>(String::compareToIgnoreCase);
     private final List<String> historyOperation = new ArrayList<>();
+    private static final int MAXCOUNTASKS = 7;
 
     public void addTask(String task) {
-        if (tasks.size() < 7) {
+        if (tasks.size() < MAXCOUNTASKS) {
             tasks.add(task);
             historyOperation.add("ADD " + task);
         }
@@ -22,10 +20,8 @@ public class Todos {
     }
 
     public String getAllTasks() {
-        List<String> sortedListTasks = new ArrayList<>(tasks);
-        sortedListTasks.sort(String::compareToIgnoreCase);
         StringBuilder allTasks = new StringBuilder();
-        for (String task : sortedListTasks) {
+        for (String task : tasks) {
             if (allTasks.length() == 0) {
                 allTasks.append(task);
             } else {
@@ -39,17 +35,17 @@ public class Todos {
         List<String> operationList = new ArrayList<>(historyOperation);
         for (int i = operationList.size() - 1; i >= 0; i--) {
             String[] operation = operationList.get(i).split(" ");
-            if (operation[0].equals("ADD")) {
-                tasks.remove(operation[1]);
-                historyOperation.remove(i);
-                historyOperation.add("RESTORE ADD");
-                break;
-            }
-            if (operation[0].equals("REMOVE")) {
-                tasks.add(operation[1]);
-                historyOperation.remove(i);
-                historyOperation.add("RESTORE REMOVE");
-                break;
+            switch (operation[0]) {
+                case "ADD":
+                    tasks.remove(operation[1]);
+                    historyOperation.remove(i);
+                    historyOperation.add("RESTORE ADD");
+                    break;
+                case "REMOVE":
+                    tasks.add(operation[1]);
+                    historyOperation.remove(i);
+                    historyOperation.add("RESTORE REMOVE");
+                    break;
             }
         }
     }
