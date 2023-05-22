@@ -11,12 +11,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class TodoServer {
-    private static final String messageToTheClient_greeting = "Привет! Я жду твой запрос в json-формате";
-    private static final String messageToTheClient_ListTask = "Измененный список задач: ";
-    private static final String messageToTheClient_NotOperation = "Такой операции нет";
-    private static final String nameOperation_ADD = "ADD";
-    private static final String nameOperation_REMOVE = "REMOVE";
-    private static final String nameOperation_RESTORE = "RESTORE";
+    private static final String messageToTheClientListTask = "Измененный список задач: ";
+    private static final String messageToTheClientNotOperation = "Такой операции нет";
+    private static final String nameOperationADD = "ADD";
+    private static final String nameOperationREMOVE = "REMOVE";
+    private static final String nameOperationRESTORE = "RESTORE";
     private final int port;
     private final Todos todos;
 
@@ -32,28 +31,27 @@ public class TodoServer {
             while (true) {
                 try (Socket socket = serverSocket.accept(); BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream())); PrintWriter out = new PrintWriter(socket.getOutputStream())) {
                     System.out.println("Подключился клиент с таким портом: " + socket.getPort());
-                    out.println(messageToTheClient_greeting);
                     String strJson = in.readLine();
                     JsonParser parser = new JsonParser();
                     JsonObject jsonObject = parser.parse(strJson).getAsJsonObject();
                     String methodFromRequest = jsonObject.get("type").getAsString();
                     String taskFromRequest;
-                    if (methodFromRequest.equals(nameOperation_RESTORE)) {
+                    if (methodFromRequest.equals(nameOperationRESTORE)) {
                         todos.restoreOperation();
-                        out.println(messageToTheClient_ListTask);
+                        out.println(messageToTheClientListTask);
                         out.println(todos.getAllTasks());
                     } else {
                         taskFromRequest = jsonObject.get("task").getAsString();
-                        if (methodFromRequest.equals(nameOperation_ADD)) {
+                        if (methodFromRequest.equals(nameOperationADD)) {
                             todos.addTask(taskFromRequest);
-                            out.println(messageToTheClient_ListTask);
+                            out.println(messageToTheClientListTask);
                             out.println(todos.getAllTasks());
-                        } else if (methodFromRequest.equals(nameOperation_REMOVE)) {
+                        } else if (methodFromRequest.equals(nameOperationREMOVE)) {
                             todos.removeTask(taskFromRequest);
-                            out.println(messageToTheClient_ListTask);
+                            out.println(messageToTheClientListTask);
                             out.println(todos.getAllTasks());
                         } else {
-                            out.println(messageToTheClient_NotOperation);
+                            out.println(messageToTheClientNotOperation);
                         }
                     }
                 }
