@@ -1,5 +1,5 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/NikitaPlatonov/Course-work-3) ![GitHub top language](https://img.shields.io/github/languages/top/NikitaPlatonov/Course-work-3)
-# Проект "Менеджер задач"
+# Менеджер задач
 **Менеджер задач** - серверное java-приложение, позволяющее управлять своими задачами.
 ## Описание
 Цель менеджера задач - предоставить клиенту простое управление своими задачами.
